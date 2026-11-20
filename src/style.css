@@ -1,0 +1,183 @@
+:root {
+  color-scheme: light dark;
+  --page-bg: #f7f4ed;
+  --page-text: #2c2c2c;
+  --rule: #c9c0b2;
+  --field-bg: #fcfaf5;
+  --field-border: #8b8376;
+  --error-text: #9c3128;
+  --star-bright: rgb(29 28 26 / 0.65);
+  --star-dim: rgb(29 28 26 / 0.55);
+
+  background: var(--page-bg);
+  color: var(--page-text);
+  font: 500 1rem/1.5 'Merriweather', Georgia, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #2c2c2c;
+    --page-text: #f7f4ed;
+    --rule: #57534e;
+    --field-bg: #252525;
+    --field-border: #85817a;
+    --error-text: #ff9d91;
+    --star-bright: rgb(247 244 237 / 0.65);
+    --star-dim: rgb(247 244 237 / 0.55);
+  }
+}
+
+body {
+  isolation: isolate;
+  min-height: 100dvh;
+  margin: 0;
+}
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+body::before {
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, var(--star-bright) 99%, transparent),
+    radial-gradient(2px 2px at 80% 15%, var(--star-bright) 99%, transparent),
+    radial-gradient(1.5px 1.5px at 25% 40%, var(--star-dim) 99%, transparent),
+    radial-gradient(1.5px 1.5px at 75% 80%, var(--star-dim) 99%, transparent),
+    radial-gradient(1px 1px at 5% 90%, var(--star-bright) 99%, transparent),
+    radial-gradient(1px 1px at 95% 25%, var(--star-dim) 99%, transparent),
+    radial-gradient(1px 1px at 20% 75%, var(--star-bright) 99%, transparent);
+}
+
+body::after {
+  background-image:
+    radial-gradient(2px 2px at 50% 70%, var(--star-bright) 99%, transparent),
+    radial-gradient(1px 1px at 15% 50%, var(--star-dim) 99%, transparent),
+    radial-gradient(1px 1px at 45% 85%, var(--star-dim) 99%, transparent),
+    radial-gradient(1px 1px at 90% 45%, var(--star-bright) 99%, transparent);
+  opacity: 0.65;
+}
+
+.container {
+  width: min(calc(100% - 2rem), 50rem);
+  margin-inline: auto;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--page-bg);
+}
+
+.site-header nav {
+  padding-block: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+main.container {
+  padding-block: clamp(2.5rem, 7vw, 4rem) 3rem;
+}
+
+h1 {
+  margin: 0 0 clamp(1.75rem, 5vw, 2.5rem);
+  font-size: clamp(2rem, 5vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.tool-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tool-list li {
+  padding-block: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+a {
+  position: relative;
+  display: inline-block;
+  color: inherit;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+a::after {
+  content: '';
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: -2px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+a:is(:hover, :focus-visible, [aria-current='page'])::after {
+  transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  body::after {
+    animation: twinkle 10s ease-in-out infinite alternate;
+  }
+
+  a::after {
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+
+@keyframes twinkle {
+  from { opacity: 0.35; }
+  to { opacity: 0.85; }
+}
+
+.form-group + .form-group {
+  margin-top: 1.25rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-weight: 600;
+}
+
+textarea {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.75rem;
+  resize: vertical;
+  border: 1px solid var(--field-border);
+  border-radius: 0.3rem;
+  background: var(--field-bg);
+  color: var(--page-text);
+  font: 1rem/1.5 ui-monospace, Consolas, monospace;
+}
+
+:is(a, textarea):focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+textarea[aria-invalid='true'] {
+  border-color: var(--error-text);
+}
+
+.error {
+  margin: 0.375rem 0 0;
+  color: var(--error-text);
+}
+
+.error:empty {
+  margin: 0;
+}

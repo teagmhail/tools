@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🌿</text></svg>" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@500;600&amp;display=swap" />
+  <link rel="stylesheet" href="/src/style.css" />
+  <title>Base64 encoder and decoder</title>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="container" aria-label="Tools">
+      <a href="%BASE_URL%">tools</a>
+    </nav>
+  </header>
+  <main class="container">
+    <h1>Base64</h1>
+    <div class="form-group">
+      <label for="base64">Base64 to decode</label>
+      <textarea id="base64" rows="7" spellcheck="false" autocapitalize="off" autocomplete="off"
+        aria-describedby="error"></textarea>
+      <p id="error" class="error" role="status"></p>
+    </div>
+    <div class="form-group">
+      <label for="plain-text">Text to encode</label>
+      <textarea id="plain-text" rows="7" spellcheck="false"></textarea>
+    </div>
+  </main>
+
+  <script type="module" src="/src/tools/base64.ts"></script>
+</body>
+
+</html>
